@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>حول موقع رمز</title>
+  <!-- خط IBM Plex Sans Arabic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <style>
+    /* تأثير الانتقال (Fade Out) */
+    body {
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+    body.fade-out {
+      opacity: 0;
+    }
+    /* القواعد العامة */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "IBM Plex Sans Arabic", sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #FAF3E0, #F2E8D5);
+      color: #5C4033;
+      direction: rtl;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      text-align: center;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: #3E2723;
+    }
+    /* الهيدر */
+    header {
+      background-color: #8B4513;
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row-reverse;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 10;
+    }
+    .logo {
+      height: 50px;
+      filter: brightness(0) invert(1);
+    }
+    .hamburger {
+      font-size: 24px;
+      cursor: pointer;
+      color: #fff;
+      padding: 8px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+    .hamburger.active {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    /* القائمة الجانبية - محاكاة نفس ترتيب الصفحة الرئيسية */
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      width: 250px;
+      height: 100%;
+      background-color: #fff;
+      color: #5C4033;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      padding: 20px;
+      z-index: 20;
+    }
+    #sidebar.active {
+      transform: translateX(0);
+    }
+    #sidebar .close-btn {
+      font-size: 22px;
+      cursor: pointer;
+      text-align: right;
+      margin-bottom: 15px;
+      color: #5C4033;
+    }
+    #sidebar .sidebar-logo {
+      margin-bottom: 15px;
+    }
+    #sidebar .sidebar-logo img {
+      height: 45px;
+      width: auto;
+      filter: brightness(0);
+    }
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 16px;
+      text-align: center;
+    }
+    #sidebar ul li {
+      margin: 12px 0;
+      border-bottom: 1px solid #EFE8DC;
+      padding-bottom: 8px;
+    }
+    #sidebar ul li:last-child {
+      border-bottom: none;
+    }
+    #sidebar ul li a {
+      color: #5C4033;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    /* صندوق الأيقونات ضمن القائمة الجانبية لتواصل معنا */
+    #socialContainer {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+    }
+    #socialContainer.active {
+      max-height: 50px;
+      opacity: 1;
+    }
+    #socialContainer a {
+      margin: 0 8px;
+      font-size: 20px;
+      color: #D2B48C;
+      transition: color 0.3s;
+    }
+    #socialContainer a:hover {
+      color: #CD853F;
+    }
+    /* الحاوية الرئيسية - جعل النصوص متمركزة */
+    .container {
+      background-color: #fff;
+      margin: 30px auto;
+      max-width: 800px;
+      width: 90%;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .container h2 {
+      margin-bottom: 25px;
+      font-size: 26px;
+      color: #3E2723;
+    }
+    /* قسم "حول" النصي */
+    .about-section {
+      margin-bottom: 25px;
+      font-size: 16px;
+      color: #3E2723;
+      line-height: 1.8;
+      text-align: center;
+    }
+    /* صندوق إخلاء المسؤولية */
+    .disclaimer {
+      background-color: #FDF8F0;
+      border: 1px solid #D2B48C;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #3E2723;
+      line-height: 1.8;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: linear-gradient(90deg, #CD853F, #D2B48C);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+      text-align: center;
+    }
+    .back-btn:hover {
+      background: linear-gradient(90deg, #D2B48C, #CD853F);
+    }
+    /* الفوتر */
+    footer {
+      background-color: #8B4513;
+      color: #F5F5DC;
+      padding: 15px;
+      text-align: center;
+      font-size: 14px;
+      margin-top: auto;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+    }
+    footer p {
+      margin-bottom: 5px;
+    }
+    footer .extra {
+      font-size: 12px;
+      color: #F5F5DC;
+    }
+    /* الشاشات الصغيرة */
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px auto;
+        padding: 20px;
+      }
+      .container h2 {
+        font-size: 22px;
+      }
+      .back-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- الهيدر -->
+  <header>
+    <div class="hamburger" id="openSidebar">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <img src="https://www2.0zz0.com/2025/04/03/00/209652548.png" alt="الشعار" class="logo" />
+  </header>
+
+  <!-- القائمة الجانبية الموحدة -->
+  <nav id="sidebar">
+    <div class="close-btn" id="closeSidebar">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+    <div class="sidebar-logo">
+      <img src="https://www2.0zz0.com/2025/04/03/00/209652548.png" alt="الشعار" />
+    </div>
+    <ul>
+      <li><a id="homeLink" href="index.html">الصفحة الرئيسية</a></li>
+      <li>
+        <a id="contactLink" href="#">تواصل معنا</a>
+        <div id="socialContainer">
+          <a href="https://www.tiktok.com/@ramzfares?_t=ZS-8vEnJdcIf4x&_r=1" target="_blank">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+          <a href="https://t.me/ramzfares">
+            <i class="fa-brands fa-telegram"></i>
+          </a>
+        </div>
+      </li>
+      <li><a id="aboutLink" href="about.html">حول</a></li>
+    </ul>
+  </nav>
+
+  <!-- المحتوى الرئيسي لصفحة "حول" -->
+  <div class="container">
+    <h2>حول موقع رمز</h2>
+    <!-- قسم حول المنصة -->
+    <div class="about-section">
+      <p>
+        منصة “رمز” نوفر منصة رقمية تساعدك على التعرف على رموز القبائل ومعانيها. سواء كنت تود معرفة رمز قبيلتك، أو تبحث عن القبيلة التي ينتمي لها رمز معين، نحن نوفر لك الإجابة بسهولة ووضوح.
+      </p>
+      <p>
+        أنشأنا هذا الموقع لتلبية حاجة متكررة بين الناس لفهم هذه الرموز التي أصبحت تُستخدم بكثرة في وسائل التواصل والمجتمع، دون أن يعرف البعض معناها أو خلفيتها.
+      </p>
+      <p>
+        لا نمثّل أي جهة، ولا نهدف إلا لتقديم المعلومة كما هي، بدون تحريف أو تحيّز.
+      </p>
+    </div>
+    <!-- صندوق إخلاء المسؤولية -->
+    <div class="disclaimer">
+      <p>
+        تنويه وإخلاء مسؤولية<br><br>
+        نحن في “رمز” نقدم معلومات تعريفية فقط، تهدف للتثقيف والتوضيح، بعيدًا كل البعد عن أي توجهات عنصرية أو نعرات قبلية.<br><br>
+        نُخلي مسؤوليتنا الكاملة عن أي استخدام خطأ وغير مسؤول أو مسيء لمحتوى الموقع، ونرفض استخدام الموقع في ما يُسبب الفتنة أو يثير الحساسية بين الناس.<br><br>
+        هدفنا هو توضيح المعلومة، لا تفريق الناس بها.
+      </p>
+    </div>
+    <button class="back-btn" id="backBtn">العودة إلى الصفحة الرئيسية</button>
+  </div>
+
+  <!-- الفوتر -->
+  <footer>
+    <p>&copy; حقوق النشر محفوظة</p>
+    <p class="extra">برمجة فارس القميشي</p>
+  </footer>
+
+  <script>
+    // دالة الانتقال (Fade Out) الجديدة
+    function fadeOutAndRedirect(url) {
+      document.body.classList.add('fade-out');
+      setTimeout(function() {
+        window.location.href = url;
+      }, 500);
+    }
+
+    // تفعيل القائمة الجانبية
+    const openSidebar = document.getElementById("openSidebar");
+    const closeSidebar = document.getElementById("closeSidebar");
+    const sidebar = document.getElementById("sidebar");
+    const hamburger = document.querySelector(".hamburger");
+    const homeLink = document.getElementById("homeLink");
+    const aboutLink = document.getElementById("aboutLink");
+    const contactLink = document.getElementById("contactLink");
+    const socialContainer = document.getElementById("socialContainer");
+    const backBtn = document.getElementById("backBtn");
+
+    openSidebar.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+      hamburger.classList.toggle("active");
+    });
+    closeSidebar.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+      hamburger.classList.remove("active");
+    });
+    // عند الضغط على عناصر القائمة يتم الانتقال بتأثير Fade Out
+    homeLink.addEventListener("click", function(event) {
+      event.preventDefault();
+      fadeOutAndRedirect("index.html");
+    });
+    aboutLink.addEventListener("click", function(event) {
+      event.preventDefault();
+      fadeOutAndRedirect("about.html");
+    });
+    backBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      fadeOutAndRedirect("index.html");
+    });
+    // تفعيل ظهور أيقونات "تواصل معنا" عند الضغط
+    contactLink.addEventListener("click", () => {
+      socialContainer.classList.toggle("active");
+    });
+  </script>
+</body>
+</html>

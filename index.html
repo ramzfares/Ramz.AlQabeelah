@@ -660,9 +660,11 @@
         { name: "وائله" },
         { name: "قيفة" },
         { name: "دهم" },
-        { name: "مراد" }
+        { name: "مراد" },
+        { name: "كندة" },
+        { name: "الدين" }
       ],
-      "505": [{ name: "قحطان" }],
+      "505": [{ name: "قحطان" }, { name: "عبيده" }],
       "454": [{ name: "بلسمر" }],
       "509": [
         { name: "بلقرن" },
@@ -747,7 +749,7 @@
       "B-79": [{ name: "بني عطية" }],
       "111": [{ name: "الحوطات" }],
       /* القبائل الجديدة */
-      "Y-10": [{ name: "يافع" }],
+      "Y-10": [{ name: "بني يافع" }],
       "716": [{ name: "نعمان" }],
       "719": [{ name: "بنير" }],
       "501": [
@@ -772,7 +774,18 @@
       "604": [{ name: "المصعبين" }],
       "910": [{ name: "ال بريك" }],
       "F-14": [{ name: "الكرب" }],
-      "712": [{ name: "نوح" }]
+      "712": [{ name: "نوح" }, { name: "سعد الظالمة" }],
+      /* القبائل الجديدة حسب الطلب */
+      "771": [{ name: "وصاب" }],
+      "720": [{ name: "العواذل" }],
+      "539": [{ name: "جهم" }],
+      "519": [{ name: "الشحري" }],
+      "220": [{ name: "الطاهري" }],
+      "959": [{ name: "بني شداد" }],
+      /* القبائل الجديدة المطلوبة */
+      "015": [{ name: "الحكلي" }],
+      "918": [{ name: "ال بريك" }],
+      "704": [{ name: "مقبنه" }]
     };
 
     const searchBtn = document.getElementById("searchBtn");
@@ -820,10 +833,15 @@
       const delay = Math.floor(Math.random() * 2000) + 3000;
       setTimeout(function () {
         loadingDiv.style.display = "none";
-        // التحقق من إدخال رمز (رقمي أو نمط B-/F-)
-        if (/^\d+$|^(B-\d+|F-\d+)$/i.test(query)) {
-          if (tribes[query]) {
-            if (tribes[query].length > 1) {
+        // التحقق من إدخال رمز (رقمي أو بنمط B-/F-/Y- مع الشرطات اختيارياً)
+        if (/^\d+$|^(B-?\d+|F-?\d+|Y-?\d+)$/i.test(query)) {
+          let code = query.toUpperCase();
+          // في حالة الرموز التي تبدأ بحرف (B/F/Y) وإدخالها بدون شرطة، يتم إضافتها
+          if (/^(B|F|Y)\d+$/i.test(code)) {
+            code = code.replace(/^(B|F|Y)/, "$1-");
+          }
+          if (tribes[code]) {
+            if (tribes[code].length > 1) {
               const table = document.createElement("table");
               table.className = "result-table";
               const thead = document.createElement("thead");
@@ -840,9 +858,9 @@
               const tbody = document.createElement("tbody");
               const row = document.createElement("tr");
               const tdCode = document.createElement("td");
-              tdCode.textContent = query;
+              tdCode.textContent = code;
               const tdTribes = document.createElement("td");
-              const tribesNames = tribes[query]
+              const tribesNames = tribes[code]
                 .map((entry) => entry.name)
                 .join("، ");
               tdTribes.textContent = tribesNames;
@@ -853,10 +871,10 @@
 
               resultDiv.appendChild(table);
             } else {
-              tribes[query].forEach(function (entry) {
+              tribes[code].forEach(function (entry) {
                 const box = document.createElement("div");
                 box.className = "tribe-box";
-                box.textContent = `هذا الرمز ${query} يعود لقبيلة ${entry.name}`;
+                box.textContent = `هذا الرمز ${code} يعود لقبيلة ${entry.name}`;
                 resultDiv.appendChild(box);
               });
             }
@@ -873,18 +891,27 @@
           for (const code in tribes) {
             tribes[code].forEach(function (entry) {
               if (normalizeArabic(entry.name).includes(normalizedQuery)) {
-                found = true;
-                const box = document.createElement("div");
-                box.className = "tribe-box";
-                box.textContent = `${entry.name} رمز القبيلة هو ${code}`;
-                resultDiv.appendChild(box);
+                // حالة خاصة لبني يافع: إذا تم البحث عن "يافع" أو "بني يافع"
+                if ((normalizedQuery === "يافع" || normalizedQuery === "بني يافع") && code === "Y-10") {
+                  found = true;
+                  const box = document.createElement("div");
+                  box.className = "tribe-box";
+                  box.textContent = `بني يافع رمز القبيلة هو Y-10`;
+                  resultDiv.appendChild(box);
+                } else {
+                  found = true;
+                  const box = document.createElement("div");
+                  box.className = "tribe-box";
+                  box.textContent = `${entry.name} رمز القبيلة هو ${code}`;
+                  resultDiv.appendChild(box);
+                }
               }
             });
           }
           if (!found) {
             resultDiv.textContent = "عفواً لم يتم العثور على رمز لهذه القبيلة";
-            // عرض الرسالة المنبثقة القديمة بعد ثانيتين في حال الاسم غير موجود
-            if (!/^\d+$|^(B-\d+|F-\d+)$/i.test(query)) {
+            // عرض الرسالة المنبثقة بعد ثانيتين في حال الاسم غير موجود
+            if (!/^\d+$|^(B-?\d+|F-?\d+|Y-?\d+)$/i.test(query)) {
               setTimeout(function() {
                 showPopup(query);
               }, 2000);
@@ -907,7 +934,7 @@
       };
     }
 
-    // دالة عرض الرسالة المنبثقة الجديدة عند إدخال رمز لقبيلة غير موجودة
+    // دالة عرض الرسالة المنبثقة عند إدخال رمز لقبيلة غير موجودة
     function showPopupCode(query) {
       const popupModal = document.getElementById("popupModal");
       const popupMessage = document.getElementById("popupMessage");

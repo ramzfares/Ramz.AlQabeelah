@@ -254,6 +254,12 @@
       margin-bottom: 12px;
       color: #3E2723;
     }
+    .result .tribe-description {
+      margin-top: 5px;
+      font-size: 0.8em;
+      color: #888;
+      font-style: italic;
+    }
     /* جدول الرموز المشتركة بتصميم صحراوي أنيق */
     .result-table {
       width: 100%;
@@ -642,7 +648,6 @@
       socialContainer.classList.toggle("active");
     });
 
-    // عند الضغط على "حول" يتم الانتقال مع تأثير الفيد
     if (aboutLink) {
       aboutLink.addEventListener("click", function(event) {
          event.preventDefault();
@@ -650,7 +655,6 @@
       });
     }
 
-    /* باقي كود البحث والوظائف كما هو موجود */
     function normalizeArabic(text) {
       return text
         .toLowerCase()
@@ -661,7 +665,6 @@
         .trim();
     }
 
-    // تعريف بيانات القبائل مع القبائل المضافة والتعديلات المطلوبة
     const tribes = {
       "715": [{ name: "لقموش" }],
       "917": [{ name: "العوالق" }],
@@ -675,7 +678,7 @@
         { name: "مراد" },
         { name: "كندة" },
         { name: "الدين" },
-        { name: "آل سحاق" }  // أضيفت لقبائل جديدة
+        { name: "آل سحاق" }
       ],
       "505": [{ name: "قحطان" }, { name: "عبيده" }],
       "454": [{ name: "بلسمر" }],
@@ -700,7 +703,7 @@
       "903": [{ name: "بارق" }],
       "309": [
         { name: "بني حمد" },
-        { name: "البلوش" }  // أضيفت لقبيلة البلوش
+        { name: "البلوش" }
       ],
       "601": [{ name: "بني الحلف" }],
       "811": [{ name: "نهد" }],
@@ -728,15 +731,9 @@
       ],
       "907": [
         { name: "بني الحكم" },
-        { name: "بني ذبيان" }  // أضيفت لقبيلة بني ذبيان
+        { name: "بني ذبيان" }
       ],
-      "515": [
-        { name: "سليم" },
-        { name: "هذيل" },
-        { name: "الاشراف" },
-        { name: "الهواشم" }
-      ],
-      "55": [{ name: "ال مره" }],  // تم استبدال رمز (405) برمز (55)
+      "515": [{ name: "قريش" }],
       "808": [{ name: "تليد" }],
       "205": [{ name: "الظفير" }],
       "503": [{ name: "سبيع" }],
@@ -744,7 +741,7 @@
         { name: "عسير" },
         { name: "غامد" }
       ],
-      "703": [{ name: "بني زيد" }],  // تم تغيير رمز بني زيد من 612 إلى 703
+      "703": [{ name: "بني يزيد" }],
       "818": [{ name: "بلي" }],
       "708": [{ name: "بني مروان" }],
       "902": [{ name: "بني شبيب" }],
@@ -763,15 +760,13 @@
       ],
       "506": [
         { name: "بني تميم" },
-        { name: "الجحادله" }  // أضيفت لقبيلة الجحادله
+        { name: "الجحادله" }
       ],
       "B-52": [{ name: "عنزه" }],
       "F-15": [{ name: "حرب" }],
-      // استبدال رمز شمر من (F-16) إلى (555)
       "555": [{ name: "شمر" }],
       "B-79": [{ name: "بني عطية" }],
       "111": [{ name: "الحوطات" }],
-      /* القبائل الجديدة */
       "Y-10": [{ name: "بني يافع" }],
       "716": [{ name: "نعمان" }],
       "719": [{ name: "بنير" }],
@@ -779,11 +774,11 @@
         { name: "بلحارث" },
         { name: "ال حميقان" }
       ],
-      // تحديث قبيلة 611 بإضافة بني حسين
       "611": [
         { name: "العوابثه" },
         { name: "باوزير" },
-        { name: "بني حسين" }
+        { name: "بني حسين" },
+        { name: "بني زيد" }
       ],
       "705": [{ name: "بني هلال" }],
       "110": [
@@ -791,11 +786,9 @@
         { name: "المناهيل" }
       ],
       "809": [{ name: "سيبان" }],
-      // تحديث رمز 512 بإضافة الكثيري وفهم
       "512": [
         { name: "ال كثير" },
-        { name: "الكثيري" },
-        { name: "فهم" }
+        { name: "بني لام" }
       ],
       "919": [{ name: "ال بريك" }],
       "714": [{ name: "حمّير" }],
@@ -805,27 +798,25 @@
       "910": [{ name: "ال بريك" }],
       "F-14": [{ name: "الكرب" }],
       "712": [{ name: "نوح" }, { name: "سعد الظالمة" }],
-      /* القبائل الجديدة حسب الطلب */
       "771": [{ name: "وصاب" }],
       "720": [{ name: "العواذل" }],
       "539": [{ name: "جهم" }],
       "519": [{ name: "الشحري" }],
       "220": [{ name: "الطاهري" }],
       "959": [{ name: "بني شداد" }],
-      /* القبائل الجديدة المطلوبة */
       "015": [{ name: "الحكلي" }],
       "918": [{ name: "ال بريك" }],
       "704": [
         { name: "مقبنه" },
-        { name: "بني كعب" }  // أضيفت لقبيلة بني كعب
+        { name: "بني كعب" }
       ],
-      /* القبائل الإضافية المطلوبة */
-      "510": [{ name: "السوادي" }],  // أضيفت لقبيلة السوادي
-      "109": [{ name: "المناصير" }],  // أضيفت لقبيلة المناصير
-      "212": [{ name: "الانصار" }],   // أضيفت لقبيلة الانصار
-      "307": [{ name: "غزوان" }],     // أضيفت لقبيلة غزوان
-      "116": [{ name: "المشيخي" }],   // أضيفت لقبيلة المشيخي
-      "F-10": [{ name: "ال شريح" }]    // أضيفت لقبيلة ال شريح
+      "510": [{ name: "السودي" }],
+      "109": [{ name: "المناصير" }],
+      "212": [{ name: "الانصار" }],
+      "307": [{ name: "غزوان" }],
+      "116": [{ name: "المشيخي" }],
+      "F-10": [{ name: "ال شريح" }],
+      "405": [{ name: "المصاريه" }]
     };
 
     const searchBtn = document.getElementById("searchBtn");
@@ -873,12 +864,17 @@
       const delay = Math.floor(Math.random() * 2000) + 3000;
       setTimeout(function () {
         loadingDiv.style.display = "none";
-        // التحقق من إدخال رمز (رقمي أو بنمط B-/F-/Y- مع الشرطات اختيارياً)
-        if (/^\d+$|^(B-?\d+|F-?\d+|Y-?\d+)$/i.test(query)) {
+        // السماح بالبحث برموز تكون أرقام أو تبدأ بحرف
+        if (/^\d+$|^(?:[A-Z]-?\d+)$/i.test(query)) {
           let code = query.toUpperCase();
-          // في حالة الرموز التي تبدأ بحرف (B/F/Y) وإدخالها بدون شرطة، يتم إضافتها
-          if (/^(B|F|Y)\d+$/i.test(code)) {
-            code = code.replace(/^(B|F|Y)/, "$1-");
+          // إذا كانت الرموز تبدأ بحرف بدون شرطة، نضيفها
+          if (/^(?:[A-Z])\d+$/i.test(code)) {
+            code = code.replace(/^(?:([A-Z]))/, "$1-");
+          }
+          // إذا لم نجد الرمز مع الشرطة، نجرب بدونها
+          if (!tribes[code] && code.includes("-")) {
+            let codeNoDash = code.replace("-", "");
+            if (tribes[codeNoDash]) { code = codeNoDash; }
           }
           if (tribes[code]) {
             if (tribes[code].length > 1) {
@@ -915,12 +911,24 @@
                 const box = document.createElement("div");
                 box.className = "tribe-box";
                 box.textContent = `هذا الرمز ${code} يعود لقبيلة ${entry.name}`;
+                // إذا كان الرمز خاص بالوصف المطلوب نضيفه داخل نفس المربع
+                if (code === "512") {
+                  const desc = document.createElement("div");
+                  desc.className = "tribe-description";
+                  desc.textContent = "(ال كثير بني لام)";
+                  box.appendChild(desc);
+                }
+                if (code === "S300") {
+                  const desc = document.createElement("div");
+                  desc.className = "tribe-description";
+                  desc.textContent = "(ال كثير همدان)";
+                  box.appendChild(desc);
+                }
                 resultDiv.appendChild(box);
               });
             }
           } else {
             resultDiv.textContent = "عفواً لم يتم العثور على قبيلة بهذا الرمز";
-            // عرض الرسالة المنبثقة الجديدة بعد ثانيتين في حال الرمز غير موجود
             setTimeout(function(){
               showPopupCode(query);
             }, 2000);
@@ -929,29 +937,34 @@
           const normalizedQuery = normalizeArabic(query);
           let found = false;
           for (const code in tribes) {
+            let codeMatched = false;
             tribes[code].forEach(function (entry) {
               if (normalizeArabic(entry.name).includes(normalizedQuery)) {
-                // حالة خاصة لبني يافع: إذا تم البحث عن "يافع" أو "بني يافع"
-                if ((normalizedQuery === "يافع" || normalizedQuery === "بني يافع") && code === "Y-10") {
-                  found = true;
-                  const box = document.createElement("div");
-                  box.className = "tribe-box";
-                  box.textContent = `بني يافع رمز القبيلة هو Y-10`;
-                  resultDiv.appendChild(box);
-                } else {
-                  found = true;
-                  const box = document.createElement("div");
-                  box.className = "tribe-box";
-                  box.textContent = `${entry.name} رمز القبيلة هو ${code}`;
-                  resultDiv.appendChild(box);
+                found = true;
+                codeMatched = true;
+                const box = document.createElement("div");
+                box.className = "tribe-box";
+                box.textContent = `${entry.name} رمز القبيلة هو ${code}`;
+                // إذا كان الرمز من الرموز الخاصة نضيف الوصف داخل نفس المربع
+                if(code === "512"){
+                  const desc = document.createElement("div");
+                  desc.className = "tribe-description";
+                  desc.textContent = "(ال كثير بني لام)";
+                  box.appendChild(desc);
                 }
+                if(code === "S300"){
+                  const desc = document.createElement("div");
+                  desc.className = "tribe-description";
+                  desc.textContent = "(ال كثير همدان)";
+                  box.appendChild(desc);
+                }
+                resultDiv.appendChild(box);
               }
             });
           }
           if (!found) {
             resultDiv.textContent = "عفواً لم يتم العثور على رمز لهذه القبيلة";
-            // عرض الرسالة المنبثقة بعد ثانيتين في حال الاسم غير موجود
-            if (!/^\d+$|^(B-?\d+|F-?\d+|Y-?\d+)$/i.test(query)) {
+            if (!/^\d+$|^(?:[A-Z]-?\d+)$/i.test(query)) {
               setTimeout(function() {
                 showPopup(query);
               }, 2000);
@@ -962,31 +975,26 @@
       }, delay);
     }
 
-    // دالة عرض الرسالة المنبثقة للقبائل غير الموجودة عند البحث بالاسم (السابقة)
     function showPopup(query) {
       const popupModal = document.getElementById("popupModal");
       const popupMessage = document.getElementById("popupMessage");
       popupMessage.innerHTML = `قد يكون الرمز لقبيلة (<strong>${query}</strong>) غير مضاف حالياً قم بالتواصل معنا لتعريفه وإضافته في المنصة`;
       popupModal.style.display = "flex";
-      // تعيين رابط التواصل القديم لهذه الحالة
       document.getElementById("contactBtn").onclick = function() {
         window.location.href = "https://t.me/ramzfares";
       };
     }
 
-    // دالة عرض الرسالة المنبثقة عند إدخال رمز لقبيلة غير موجودة
     function showPopupCode(query) {
       const popupModal = document.getElementById("popupModal");
       const popupMessage = document.getElementById("popupMessage");
       popupMessage.innerHTML = `قد يكون رمز (<strong>${query}</strong>) يتبع لقبيلة غير مسجلة في المنصة، يمكنك التواصل معنا في حال أردت إضافته`;
       popupModal.style.display = "flex";
-      // تعيين رابط التواصل الجديد لهذه الحالة
       document.getElementById("contactBtn").onclick = function() {
         window.location.href = "https://t.me/ramzfares";
       };
     }
 
-    // التعامل مع زر إلغاء النافذة المنبثقة
     document.getElementById("cancelBtn").addEventListener("click", function() {
       document.getElementById("popupModal").style.display = "none";
     });

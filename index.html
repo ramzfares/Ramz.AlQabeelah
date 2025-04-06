@@ -920,7 +920,7 @@
         return;
       }
       
-      // إرسال بيانات الاستعلام إلى Clicky
+      // إرسال الاستعلام إلى Clicky
       if (window.clicky) {
         clicky.log('بحث_قبيلة', query);
       }
@@ -945,9 +945,10 @@
             if (tribes[codeNoDash]) { code = codeNoDash; }
           }
           if (tribes[code]) {
-            // إرسال رمز القبيلة إلى Clicky عند العثور عليه
+            // إرسال النتيجة إلى Clicky (نتيجة البحث)
             if (window.clicky) {
-              clicky.log('رمز_القبيلة', code);
+              let tribeResult = tribes[code].map(entry => entry.name).join("، ") + " (" + code + ")";
+              clicky.log('نتيجة_البحث', tribeResult);
             }
             if (tribes[code].length > 1) {
               const table = document.createElement("table");
@@ -1000,6 +1001,9 @@
             }
           } else {
             resultDiv.textContent = "عفواً لم يتم العثور على قبيلة بهذا الرمز";
+            if (window.clicky) {
+              clicky.log('بحث_غير_ناجح', query);
+            }
             setTimeout(function(){
               showPopupCode(query);
             }, 2000);
@@ -1010,11 +1014,11 @@
           for (const code in tribes) {
             tribes[code].forEach(function (entry) {
               if (normalizeArabic(entry.name).includes(normalizedQuery)) {
-                // إرسال بيانات البحث بالاسم إلى Clicky
-                if (window.clicky) {
-                  clicky.log('بحث_قبيلة_بالاسم', query + " => " + code);
-                }
                 found = true;
+                // إرسال النتيجة إلى Clicky
+                if (window.clicky) {
+                  clicky.log('نتيجة_البحث', entry.name + " (" + code + ")");
+                }
                 const box = document.createElement("div");
                 box.className = "tribe-box";
                 box.textContent = `${entry.name} رمز القبيلة هو ${code}`;
@@ -1036,6 +1040,9 @@
           }
           if (!found) {
             resultDiv.textContent = "عفواً لم يتم العثور على رمز لهذه القبيلة";
+            if (window.clicky) {
+              clicky.log('بحث_غير_ناجح', query);
+            }
             if (!/^\d+$|^(?:[A-Z]-?\d+)$/i.test(query)) {
               setTimeout(function() {
                 showPopup(query);

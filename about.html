@@ -5,15 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>حول موقع رمز</title>
   <!-- خط IBM Plex Sans Arabic -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet" />
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+  <!-- مكتبة أيقونات Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <style>
-    /* تأثير الانتقال (Fade Out) */
+    /* تدرج لوني جميل لخلفية الصفحة مع مسافة كافية من الهيدر */
     body {
-      opacity: 1;
+      background: linear-gradient(135deg, #FAF3E0, #F2E8D5);
+      color: #5C4033;
+      direction: rtl;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      text-align: center;
+      padding-top: 120px; /* لضمان ظهور المحتوى بعد الهيدر الثابت */
       transition: opacity 0.5s ease;
     }
     body.fade-out {
@@ -26,16 +34,6 @@
       box-sizing: border-box;
       font-family: "IBM Plex Sans Arabic", sans-serif;
     }
-    body {
-      background: linear-gradient(135deg, #FAF3E0, #F2E8D5);
-      color: #5C4033;
-      direction: rtl;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      line-height: 1.6;
-      text-align: center;
-    }
     a {
       text-decoration: none;
       color: inherit;
@@ -43,9 +41,15 @@
     h1, h2, h3, h4, h5, h6 {
       color: #3E2723;
     }
-    /* الهيدر */
+    /* الهيدر الثابت مع تأثير زجاجي */
     header {
-      background-color: #8B4513;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      background: rgba(139, 69, 19, 0.8);
+      backdrop-filter: blur(10px);
       color: #fff;
       padding: 15px 20px;
       display: flex;
@@ -53,8 +57,6 @@
       justify-content: space-between;
       flex-direction: row-reverse;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      position: relative;
-      z-index: 10;
     }
     .logo {
       height: 50px;
@@ -71,7 +73,7 @@
     .hamburger.active {
       background-color: rgba(255, 255, 255, 0.2);
     }
-    /* القائمة الجانبية - محاكاة نفس ترتيب الصفحة الرئيسية */
+    /* القائمة الجانبية مع تأثير زجاجي */
     #sidebar {
       position: fixed;
       top: 0;
@@ -79,7 +81,8 @@
       transform: translateX(-100%);
       width: 250px;
       height: 100%;
-      background-color: #fff;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
       color: #5C4033;
       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease;
@@ -124,7 +127,7 @@
       font-weight: bold;
       cursor: pointer;
     }
-    /* صندوق الأيقونات ضمن القائمة الجانبية لتواصل معنا */
+    /* صندوق الأيقونات داخل القائمة الجانبية لتواصل معنا */
     #socialContainer {
       max-height: 0;
       opacity: 0;
@@ -144,15 +147,16 @@
     #socialContainer a:hover {
       color: #CD853F;
     }
-    /* الحاوية الرئيسية - جعل النصوص متمركزة */
+    /* الحاوية الرئيسية مع تأثير زجاجي */
     .container {
-      background-color: #fff;
-      margin: 30px auto;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      margin: 60px auto 30px;
       max-width: 800px;
       width: 90%;
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       text-align: center;
     }
     .container h2 {
@@ -170,7 +174,8 @@
     }
     /* صندوق إخلاء المسؤولية */
     .disclaimer {
-      background-color: #FDF8F0;
+      background: rgba(253, 248, 240, 0.8);
+      backdrop-filter: blur(5px);
       border: 1px solid #D2B48C;
       padding: 15px;
       border-radius: 8px;
@@ -196,15 +201,16 @@
     .back-btn:hover {
       background: linear-gradient(90deg, #D2B48C, #CD853F);
     }
-    /* الفوتر */
+    /* الفوتر مع تأثير زجاجي */
     footer {
-      background-color: #8B4513;
+      background: rgba(139, 69, 19, 0.8);
+      backdrop-filter: blur(10px);
       color: #F5F5DC;
       padding: 15px;
       text-align: center;
       font-size: 14px;
       margin-top: auto;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
     }
     footer p {
       margin-bottom: 5px;
@@ -230,21 +236,21 @@
   </style>
 </head>
 <body>
-  <!-- الهيدر -->
+  <!-- الهيدر الثابت -->
   <header>
     <div class="hamburger" id="openSidebar">
-      <i class="fa-solid fa-bars"></i>
+      <i class="bx bx-menu"></i>
     </div>
-    <img src="https://www2.0zz0.com/2025/04/03/00/209652548.png" alt="الشعار" class="logo" />
+    <img src="https://www2.0zz0.com/2025/04/03/00/209652548.png" alt="الشعار" class="logo">
   </header>
 
   <!-- القائمة الجانبية الموحدة -->
   <nav id="sidebar">
     <div class="close-btn" id="closeSidebar">
-      <i class="fa-solid fa-xmark"></i>
+      <i class="bx bx-x"></i>
     </div>
     <div class="sidebar-logo">
-      <img src="https://www2.0zz0.com/2025/04/03/00/209652548.png" alt="الشعار" />
+      <img src="https://www2.0zz0.com/2025/04/03/00/209652548.png" alt="الشعار">
     </div>
     <ul>
       <li><a id="homeLink" href="index.html">الصفحة الرئيسية</a></li>
@@ -252,10 +258,10 @@
         <a id="contactLink" href="#">تواصل معنا</a>
         <div id="socialContainer">
           <a href="https://www.tiktok.com/@ramzfares?_t=ZS-8vEnJdcIf4x&_r=1" target="_blank">
-            <i class="fa-brands fa-tiktok"></i>
+            <i class="bx bxl-tiktok"></i>
           </a>
           <a href="https://t.me/ramzfares">
-            <i class="fa-brands fa-telegram"></i>
+            <i class="bx bxl-telegram"></i>
           </a>
         </div>
       </li>
@@ -266,7 +272,6 @@
   <!-- المحتوى الرئيسي لصفحة "حول" -->
   <div class="container">
     <h2>حول موقع رمز</h2>
-    <!-- قسم حول المنصة -->
     <div class="about-section">
       <p>
         منصة “رمز” نوفر منصة رقمية تساعدك على التعرف على رموز القبائل ومعانيها. سواء كنت تود معرفة رمز قبيلتك، أو تبحث عن القبيلة التي ينتمي لها رمز معين، نحن نوفر لك الإجابة بسهولة ووضوح.
@@ -278,7 +283,6 @@
         لا نمثّل أي جهة، ولا نهدف إلا لتقديم المعلومة كما هي، بدون تحريف أو تحيّز.
       </p>
     </div>
-    <!-- صندوق إخلاء المسؤولية -->
     <div class="disclaimer">
       <p>
         تنويه وإخلاء مسؤولية<br><br>
@@ -297,14 +301,13 @@
   </footer>
 
   <script>
-    // دالة الانتقال (Fade Out) الجديدة
+    // دالة الانتقال (Fade Out)
     function fadeOutAndRedirect(url) {
       document.body.classList.add('fade-out');
       setTimeout(function() {
         window.location.href = url;
       }, 500);
     }
-
     // تفعيل القائمة الجانبية
     const openSidebar = document.getElementById("openSidebar");
     const closeSidebar = document.getElementById("closeSidebar");
@@ -324,7 +327,7 @@
       sidebar.classList.remove("active");
       hamburger.classList.remove("active");
     });
-    // عند الضغط على عناصر القائمة يتم الانتقال بتأثير Fade Out
+    // الانتقال بتأثير Fade Out عند الضغط على روابط القائمة
     homeLink.addEventListener("click", function(event) {
       event.preventDefault();
       fadeOutAndRedirect("index.html");

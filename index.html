@@ -8,24 +8,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet" />
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <!-- مكتبة أيقونات Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <style>
-    /* منع سحب الصور وحفظها */
-    img {
-      -webkit-user-drag: none;
-      -moz-user-drag: none;
-      -o-user-drag: none;
-      user-drag: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    /* تأثيرات الانتقال (Fade) */
+    /* تدرج لوني جميل لخلفية الصفحة */
     body {
-      opacity: 1;
+      background: linear-gradient(135deg, #FAF3E0, #F2E8D5);
+      color: #5C4033;
+      direction: rtl;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      text-align: center;
+      /* زيادة المسافة العليا لتفادي تغطية المحتوى بالهيدر الثابت */
+      padding-top: 120px;
       transition: opacity 0.5s ease;
     }
     body.fade-out {
@@ -38,16 +35,6 @@
       box-sizing: border-box;
       font-family: "IBM Plex Sans Arabic", sans-serif;
     }
-    body {
-      background: linear-gradient(135deg, #FAF3E0, #F2E8D5);
-      color: #5C4033;
-      direction: rtl;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      line-height: 1.6;
-      text-align: center;
-    }
     a {
       text-decoration: none;
       color: inherit;
@@ -55,9 +42,15 @@
     h1, h2, h3, h4, h5, h6 {
       color: #3E2723;
     }
-    /* الهيدر */
+    /* الهيدر الثابت مع تأثير زجاجي */
     header {
-      background-color: #8B4513;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      background: rgba(139, 69, 19, 0.8);
+      backdrop-filter: blur(10px);
       color: #fff;
       padding: 15px 20px;
       display: flex;
@@ -65,8 +58,6 @@
       justify-content: space-between;
       flex-direction: row-reverse;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      position: relative;
-      z-index: 10;
     }
     .logo {
       height: 50px;
@@ -83,7 +74,7 @@
     .hamburger.active {
       background-color: rgba(255, 255, 255, 0.2);
     }
-    /* القائمة الجانبية */
+    /* القائمة الجانبية مع تأثير زجاجي */
     #sidebar {
       position: fixed;
       top: 0;
@@ -91,7 +82,8 @@
       transform: translateX(-100%);
       width: 250px;
       height: 100%;
-      background-color: #fff;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
       color: #5C4033;
       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease;
@@ -156,10 +148,11 @@
     #socialContainer a:hover {
       color: #CD853F;
     }
-    /* الحاوية الرئيسية */
+    /* حاوية البحث الرئيسية مع تأثير زجاجي */
     .container {
-      background-color: #fff;
-      margin: 30px auto;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      margin: 60px auto 30px; /* زيادة المسافة من الأعلى */
       max-width: 800px;
       width: 90%;
       padding: 30px;
@@ -233,13 +226,12 @@
     .search-button:hover {
       background: linear-gradient(90deg, #D2B48C, #CD853F);
     }
-    /* عرض النتائج */
+    /* إعادة تصميم نتائج البحث إلى النمط السابق */
     .result {
       margin-top: 20px;
       opacity: 0;
       transition: opacity 0.5s ease-in-out;
       font-size: 18px;
-      white-space: pre-wrap;
       text-align: center;
       color: #3E2723;
     }
@@ -247,20 +239,15 @@
       opacity: 1;
     }
     .result .tribe-box {
-      background-color: #FDF8F0;
+      background: rgba(253, 248, 240, 0.8);
+      backdrop-filter: blur(5px);
       border: 1px solid #D2B48C;
       padding: 12px;
       border-radius: 8px;
       margin-bottom: 12px;
       color: #3E2723;
     }
-    .result .tribe-description {
-      margin-top: 5px;
-      font-size: 0.8em;
-      color: #888;
-      font-style: italic;
-    }
-    /* جدول الرموز المشتركة بتصميم صحراوي أنيق */
+    /* تنسيق جدول النتائج في حال وجود أكثر من قبيلة مشتركة */
     .result-table {
       width: 100%;
       border-collapse: separate;
@@ -296,11 +283,50 @@
     .result-table tbody tr:last-child td {
       border-bottom: none;
     }
-    /* حاوية الأسئلة الشائعة */
-    .faq-container {
+    /* حاوية الإعلانات بتصميم زجاجي أنيق */
+    .ad-container {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      margin: 30px auto;
       max-width: 800px;
       width: 90%;
-      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .ad-container h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #3E2723;
+    }
+    .ad-container p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #5C4033;
+    }
+    .ad-button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(90deg, #CD853F, #D2B48C);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ad-button:hover {
+      background: linear-gradient(90deg, #D2B48C, #CD853F);
+    }
+    /* حاوية الأسئلة الشائعة مع تأثير زجاجي */
+    .faq-container {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      max-width: 800px;
+      width: 90%;
       margin: 30px auto;
       padding: 25px;
       border-radius: 10px;
@@ -341,7 +367,9 @@
       transition: transform 0.3s;
     }
     .faq-question.active .faq-icon {
+      /* استبدال أيقونات Font Awesome بأيقونات Boxicons */
       transform: rotate(180deg);
+      /* سيتم استبدال الكلاس لاحقاً */
     }
     .faq-answer {
       padding: 12px 18px;
@@ -351,11 +379,12 @@
       color: #3E2723;
       font-size: 15px;
     }
-    /* حاوية "تابعنا على" الخارجية */
+    /* حاوية "تابعنا على" الخارجية مع تأثير زجاجي */
     .contact-container {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
       max-width: 800px;
       width: 90%;
-      background-color: #fff;
       margin: 30px auto;
       padding: 20px;
       border-radius: 10px;
@@ -400,9 +429,10 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    /* الفوتر */
+    /* الفوتر مع تأثير زجاجي */
     footer {
-      background-color: #8B4513;
+      background: rgba(139, 69, 19, 0.8);
+      backdrop-filter: blur(10px);
       color: #F5F5DC;
       padding: 15px;
       text-align: center;
@@ -421,7 +451,8 @@
     @media (max-width: 600px) {
       .container,
       .faq-container,
-      .contact-container {
+      .contact-container,
+      .ad-container {
         margin: 20px auto;
         padding: 20px;
       }
@@ -436,7 +467,7 @@
         font-size: 20px;
       }
     }
-    /* تنسيق نافذة الرسالة المنبثقة */
+    /* تنسيق نافذة الرسالة المنبثقة مع تأثير زجاجي */
     .popup-modal {
       position: fixed;
       top: 0;
@@ -450,7 +481,8 @@
       z-index: 30;
     }
     .popup-content {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
       padding: 20px;
       border-radius: 10px;
       text-align: center;
@@ -484,10 +516,10 @@
   </style>
 </head>
 <body>
-  <!-- الهيدر -->
+  <!-- الهيدر الثابت -->
   <header>
     <div class="hamburger" id="openSidebar">
-      <i class="fa-solid fa-bars"></i>
+      <i class="bx bx-menu"></i>
     </div>
     <img src="https://www2.0zz0.com/2025/04/03/00/209652548.png" alt="الشعار" class="logo" oncontextmenu="return false;" draggable="false" />
   </header>
@@ -495,7 +527,7 @@
   <!-- القائمة الجانبية -->
   <nav id="sidebar">
     <div class="close-btn" id="closeSidebar">
-      <i class="fa-solid fa-xmark"></i>
+      <i class="bx bx-x"></i>
     </div>
     <div class="sidebar-logo">
       <img src="https://www2.0zz0.com/2025/04/03/00/209652548.png" alt="الشعار" oncontextmenu="return false;" draggable="false" />
@@ -504,26 +536,26 @@
       <li><a id="homeLink" href="#">الصفحة الرئيسية</a></li>
       <li>
         <a id="contactLink" href="#">تواصل معنا</a>
-        <!-- ظهور الأيقونات تحت نص تواصل معنا مباشرة -->
+        <!-- ظهور الأيقونات تحت نص "تواصل معنا" -->
         <div id="socialContainer">
-          <a href="https://www.tiktok.com/@ramzfares?_t=ZS-8vEnJdcIf4x&_r=1" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-          <a href="https://t.me/ramzfares"><i class="fa-brands fa-telegram"></i></a>
+          <a href="https://www.tiktok.com/@ramzfares?_t=ZS-8vEnJdcIf4x&_r=1" target="_blank"><i class="bx bxl-tiktok"></i></a>
+          <a href="https://t.me/ramzfares"><i class="bx bxl-telegram"></i></a>
         </div>
       </li>
       <li><a id="aboutLink" href="about.html">حول</a></li>
     </ul>
   </nav>
 
-  <!-- الحاوية الرئيسية -->
+  <!-- حاوية البحث الرئيسية -->
   <div class="container">
     <h2>الباحث في رموز القبائل</h2>
     <div class="input-container">
       <input type="text" id="searchInput" placeholder="أدخل رمز القبيلة أو اسمها" enterkeyhint="go" />
-      <i class="fa-solid fa-magnifying-glass input-icon"></i>
-      <i class="fa-solid fa-xmark clear-icon" id="clearBtn"></i>
+      <i class="bx bx-search input-icon"></i>
+      <i class="bx bx-x clear-icon" id="clearBtn"></i>
     </div>
     <button id="searchBtn" class="search-button">
-      <i class="fa-solid fa-magnifying-glass"></i>
+      <i class="bx bx-search"></i>
       بحث
     </button>
     <div id="result" class="result"></div>
@@ -533,13 +565,23 @@
     </div>
   </div>
 
+  <!-- حاوية الإعلانات -->
+  <div class="ad-container">
+    <h3>اعلاناتنا</h3>
+    <p>هل تريد الإعلان على الموقع؟ تواصل معنا عبر تيليجرام للتفاصيل.</p>
+    <button id="adTelegramBtn" class="ad-button">
+      <i class="bx bxl-telegram"></i>
+      تواصل عبر تيليجرام
+    </button>
+  </div>
+
   <!-- حاوية الأسئلة الشائعة -->
   <div class="faq-container">
     <h3>الأسئلة الشائعة</h3>
     <div class="faq-item">
       <div class="faq-question">
         <span>1. وش المقصود برموز القبائل؟</span>
-        <i class="faq-icon fa-solid fa-chevron-down"></i>
+        <i class="bx bx-chevron-down faq-icon"></i>
       </div>
       <div class="faq-answer">
         رموز القبائل هي أرقام يختارها أفراد القبيلة لتمثيلها بشكل رمزي، غالبًا في مواقع التواصل، وتستخدم كنوع من الفخر بالانتماء.
@@ -548,7 +590,7 @@
     <div class="faq-item">
       <div class="faq-question">
         <span>2. هل رموز القبائل رسمية؟</span>
-        <i class="faq-icon fa-solid fa-chevron-down"></i>
+        <i class="bx bx-chevron-down faq-icon"></i>
       </div>
       <div class="faq-answer">
         لا. الرموز غير رسمية ولا معتمدة من أي جهة حكومية. هي رموز اجتهادية وشعبية يستخدمها الشباب بشكل غير رسمي.
@@ -557,7 +599,7 @@
     <div class="faq-item">
       <div class="faq-question">
         <span>3. من اللي يحدد رمز القبيلة؟</span>
-        <i class="faq-icon fa-solid fa-chevron-down"></i>
+        <i class="bx bx-chevron-down faq-icon"></i>
       </div>
       <div class="faq-answer">
         عادةً يتم تداول الرمز بين أفراد القبيلة حتى ينتشر ويصبح معروف، ولا توجد جهة رسمية تحدده.
@@ -566,7 +608,7 @@
     <div class="faq-item">
       <div class="faq-question">
         <span>4. هل ممكن أكثر من قبيلة تستخدم نفس الرقم؟</span>
-        <i class="faq-icon fa-solid fa-chevron-down"></i>
+        <i class="bx bx-chevron-down faq-icon"></i>
       </div>
       <div class="faq-answer">
         نعم، أحيانًا أكثر من قبيلة تستخدم نفس الرمز خاصةً إذا كان الرقم مميزًا أو ذو شعبية.
@@ -575,7 +617,7 @@
     <div class="faq-item">
       <div class="faq-question">
         <span>5. هل كل القبائل لها رموز؟</span>
-        <i class="faq-icon fa-solid fa-chevron-down"></i>
+        <i class="bx bx-chevron-down faq-icon"></i>
       </div>
       <div class="faq-answer">
         لا، بعض القبائل لها رموز متداولة بينما لا تهتم البعض الآخر بتلك الرموز.
@@ -587,8 +629,8 @@
   <div class="contact-container">
     <h3>تابعنا على</h3>
     <div class="social-icons">
-      <a href="https://www.tiktok.com/@ramzfares?_t=ZS-8vEnRkpwuDY&_r=1" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-      <a href="https://t.me/ramzfares"><i class="fa-brands fa-telegram"></i></a>
+      <a href="https://www.tiktok.com/@ramzfares?_t=ZS-8vEnRkpwuDY&_r=1" target="_blank"><i class="bx bxl-tiktok"></i></a>
+      <a href="https://t.me/ramzfares"><i class="bx bxl-telegram"></i></a>
     </div>
   </div>
 
@@ -916,7 +958,6 @@
                 const box = document.createElement("div");
                 box.className = "tribe-box";
                 box.textContent = `هذا الرمز ${code} يعود لقبيلة ${entry.name}`;
-                // إذا كان الرمز خاص بالوصف المطلوب نضيفه داخل نفس المربع
                 if (code === "512") {
                   const desc = document.createElement("div");
                   desc.className = "tribe-description";
@@ -942,15 +983,12 @@
           const normalizedQuery = normalizeArabic(query);
           let found = false;
           for (const code in tribes) {
-            let codeMatched = false;
             tribes[code].forEach(function (entry) {
               if (normalizeArabic(entry.name).includes(normalizedQuery)) {
                 found = true;
-                codeMatched = true;
                 const box = document.createElement("div");
                 box.className = "tribe-box";
                 box.textContent = `${entry.name} رمز القبيلة هو ${code}`;
-                // إذا كان الرمز من الرموز الخاصة نضيف الوصف داخل نفس المربع
                 if(code === "512"){
                   const desc = document.createElement("div");
                   desc.className = "tribe-description";
@@ -1004,6 +1042,11 @@
       document.getElementById("popupModal").style.display = "none";
     });
 
+    // تفعيل زر إعلان تيليجرام في حاوية الإعلانات
+    document.getElementById("adTelegramBtn").addEventListener("click", function() {
+      window.location.href = "https://t.me/ramzfares";
+    });
+
     const faqQuestions = document.querySelectorAll(".faq-question");
     faqQuestions.forEach((question) => {
       question.addEventListener("click", function () {
@@ -1012,11 +1055,11 @@
         if (answer.style.display === "block") {
           answer.style.display = "none";
           this.classList.remove("active");
-          icon.classList.replace("fa-chevron-up", "fa-chevron-down");
+          icon.classList.replace("bx-chevron-up", "bx-chevron-down");
         } else {
           answer.style.display = "block";
           this.classList.add("active");
-          icon.classList.replace("fa-chevron-down", "fa-chevron-up");
+          icon.classList.replace("bx-chevron-down", "bx-chevron-up");
         }
       });
     });

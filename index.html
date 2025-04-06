@@ -1000,9 +1000,11 @@
               });
             }
           } else {
+            // عند عدم العثور على القبيلة برمز رقمي
+            let notFoundMsg = `قد يكون رمز (${query}) يتبع لقبيلة غير مسجلة في المنصة، يمكنك التواصل معنا في حال أردت إضافته`;
             resultDiv.textContent = "عفواً لم يتم العثور على قبيلة بهذا الرمز";
             if (window.clicky) {
-              clicky.log('بحث_غير_ناجح', query);
+              clicky.log('بحث_غير_ناجح', notFoundMsg);
             }
             setTimeout(function(){
               showPopupCode(query);
@@ -1039,9 +1041,10 @@
             });
           }
           if (!found) {
+            let notFoundMsg = `قد يكون رمز (${query}) يتبع لقبيلة غير مسجلة في المنصة، يمكنك التواصل معنا في حال أردت إضافته`;
             resultDiv.textContent = "عفواً لم يتم العثور على رمز لهذه القبيلة";
             if (window.clicky) {
-              clicky.log('بحث_غير_ناجح', query);
+              clicky.log('بحث_غير_ناجح', notFoundMsg);
             }
             if (!/^\d+$|^(?:[A-Z]-?\d+)$/i.test(query)) {
               setTimeout(function() {

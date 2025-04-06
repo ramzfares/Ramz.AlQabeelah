@@ -155,7 +155,7 @@
       background: rgba(255, 255, 255, 0.7);
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
-      margin: 60px auto 30px; /* زيادة المسافة من الأعلى */
+      margin: 60px auto 30px;
       max-width: 800px;
       width: 90%;
       padding: 30px;
@@ -545,7 +545,7 @@
         <a id="contactLink" href="#">تواصل معنا</a>
         <!-- ظهور الأيقونات تحت نص "تواصل معنا" -->
         <div id="socialContainer">
-          <a href="https://www.tiktok.com/@ramzfares?_t=ZS-8vEnJdcIf4x&_r=1" target="_blank"><i class="bx bxl-tiktok"></i></a>
+          <a href="https://www.tiktok.com/@ramzfares?_t=ZS-8vEnRkpwuDY&_r=1" target="_blank"><i class="bx bxl-tiktok"></i></a>
           <a href="https://t.me/ramzfares"><i class="bx bxl-telegram"></i></a>
         </div>
       </li>
@@ -919,6 +919,12 @@
         resultDiv.classList.add("show");
         return;
       }
+      
+      // إرسال بيانات الاستعلام إلى Clicky
+      if (window.clicky) {
+        clicky.log('بحث_قبيلة', query);
+      }
+      
       resultDiv.classList.remove("show");
       resultDiv.innerHTML = "";
       loadingDiv.style.display = "flex";
@@ -939,6 +945,10 @@
             if (tribes[codeNoDash]) { code = codeNoDash; }
           }
           if (tribes[code]) {
+            // إرسال رمز القبيلة إلى Clicky عند العثور عليه
+            if (window.clicky) {
+              clicky.log('رمز_القبيلة', code);
+            }
             if (tribes[code].length > 1) {
               const table = document.createElement("table");
               table.className = "result-table";
@@ -1000,6 +1010,10 @@
           for (const code in tribes) {
             tribes[code].forEach(function (entry) {
               if (normalizeArabic(entry.name).includes(normalizedQuery)) {
+                // إرسال بيانات البحث بالاسم إلى Clicky
+                if (window.clicky) {
+                  clicky.log('بحث_قبيلة_بالاسم', query + " => " + code);
+                }
                 found = true;
                 const box = document.createElement("div");
                 box.className = "tribe-box";

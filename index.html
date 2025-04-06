@@ -969,15 +969,12 @@
               const tdCode = document.createElement("td");
               tdCode.textContent = code;
               const tdTribes = document.createElement("td");
-              const tribesNames = tribes[code]
-                .map((entry) => entry.name)
-                .join("، ");
+              const tribesNames = tribes[code].map((entry) => entry.name).join("، ");
               tdTribes.textContent = tribesNames;
               row.appendChild(tdCode);
               row.appendChild(tdTribes);
               tbody.appendChild(row);
               table.appendChild(tbody);
-
               resultDiv.appendChild(table);
             } else {
               tribes[code].forEach(function (entry) {
@@ -1000,9 +997,9 @@
               });
             }
           } else {
-            // عند عدم العثور على القبيلة برمز رقمي
-            let notFoundMsg = `قد يكون رمز (${query}) يتبع لقبيلة غير مسجلة في المنصة، يمكنك التواصل معنا في حال أردت إضافته`;
-            resultDiv.textContent = "عفواً لم يتم العثور على قبيلة بهذا الرمز";
+            // عند عدم العثور على القبيلة باستخدام الرمز
+            let notFoundMsg = "عفواً لم يتم العثور على قبيلة بهذا الرمز";
+            resultDiv.textContent = notFoundMsg;
             if (window.clicky) {
               clicky.log('بحث_غير_ناجح', notFoundMsg);
             }
@@ -1024,13 +1021,13 @@
                 const box = document.createElement("div");
                 box.className = "tribe-box";
                 box.textContent = `${entry.name} رمز القبيلة هو ${code}`;
-                if(code === "512"){
+                if (code === "512") {
                   const desc = document.createElement("div");
                   desc.className = "tribe-description";
                   desc.textContent = "(ال كثير بني لام)";
                   box.appendChild(desc);
                 }
-                if(code === "S300"){
+                if (code === "S300") {
                   const desc = document.createElement("div");
                   desc.className = "tribe-description";
                   desc.textContent = "(ال كثير همدان)";
@@ -1041,8 +1038,9 @@
             });
           }
           if (!found) {
-            let notFoundMsg = `قد يكون رمز (${query}) يتبع لقبيلة غير مسجلة في المنصة، يمكنك التواصل معنا في حال أردت إضافته`;
-            resultDiv.textContent = "عفواً لم يتم العثور على رمز لهذه القبيلة";
+            // عند عدم العثور على القبيلة باستخدام الاسم
+            let notFoundMsg = "عفواً لم يتم العثور على رمز لهذه القبيلة";
+            resultDiv.textContent = notFoundMsg;
             if (window.clicky) {
               clicky.log('بحث_غير_ناجح', notFoundMsg);
             }

@@ -850,7 +850,8 @@
       "809": [{ name: "سيبان" }],
       "512": [
         { name: "ال كثير" },
-        { name: "بني لام" }
+        { name: "بني لام" },
+        { name: "فهم" }
       ],
       "919": [{ name: "ال بريك" }],
       "714": [{ name: "حمّير" }],
@@ -983,7 +984,8 @@
                 const box = document.createElement("div");
                 box.className = "tribe-box";
                 box.textContent = `هذا الرمز ${code} يعود لقبيلة ${entry.name}`;
-                if (code === "512") {
+                // عند كود 512 نضيف الوصف فقط عند ظهور قبيلة "ال كثير"
+                if (code === "512" && entry.name === "ال كثير") {
                   const desc = document.createElement("div");
                   desc.className = "tribe-description";
                   desc.textContent = "(ال كثير بني لام)";
@@ -1023,7 +1025,8 @@
                 const box = document.createElement("div");
                 box.className = "tribe-box";
                 box.textContent = `${entry.name} رمز القبيلة هو ${code}`;
-                if (code === "512") {
+                // عند كود 512 نضيف الوصف فقط عند ظهور قبيلة "ال كثير"
+                if (code === "512" && entry.name === "ال كثير") {
                   const desc = document.createElement("div");
                   desc.className = "tribe-description";
                   desc.textContent = "(ال كثير بني لام)";

@@ -2648,6 +2648,163 @@ footer.ramz-footer{
   }
 }
 
+
+/* ===== صفحة الحجب الموحدة - إصدار مرتب ===== */
+.blocked-page{
+  min-height:100svh;
+  width:100%;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(107,66,43,.045),transparent 34%),
+    var(--bg);
+  color:var(--text);
+  direction:rtl;
+  text-align:center;
+  padding:0 22px;
+}
+.blocked-top{
+  width:min(980px,100%);
+  margin:0 auto;
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-bottom:1px solid rgba(107,66,43,.10);
+}
+.blocked-brand{
+  position:static !important;
+  inset:auto !important;
+  color:var(--brand);
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:-.2px;
+}
+.blocked-brand span{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:500;
+}
+.blocked-content{
+  width:min(560px,100%);
+  margin:auto;
+  padding:48px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.blocked-symbol{
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  margin-bottom:18px;
+  border:1px solid var(--border-strong);
+  border-radius:50%;
+  color:var(--brand);
+  background:transparent;
+  font-size:25px;
+}
+.blocked-content h1{
+  margin:0;
+  color:var(--text);
+  font-size:30px;
+  line-height:1.35;
+  font-weight:800;
+  letter-spacing:-.3px;
+}
+.blocked-message{
+  max-width:500px;
+  margin:12px auto 0;
+  color:var(--muted);
+  font-size:15px;
+  line-height:2;
+}
+.blocked-duration{
+  margin-top:18px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  color:var(--brand);
+  font-size:12px;
+  font-weight:700;
+}
+.blocked-duration i{font-size:16px}
+.blocked-rule{
+  width:38px;
+  height:1px;
+  margin:22px auto 18px;
+  background:var(--border-strong);
+}
+.blocked-note{
+  max-width:460px;
+  margin:0 auto;
+  color:#8f8178;
+  font-size:12px;
+  line-height:1.9;
+}
+.blocked-footer{
+  position:static !important;
+  inset:auto !important;
+  width:min(980px,100%);
+  min-height:58px;
+  margin:0 auto;
+  padding:14px 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border-top:1px solid rgba(107,66,43,.10);
+  color:#9a8d84;
+  font-size:10px;
+}
+.blocked-footer span+span::before{
+  content:"•";
+  margin-left:8px;
+  color:#c0b3aa;
+}
+@media(max-width:600px){
+  .blocked-page{padding:0 18px}
+  .blocked-top{min-height:66px}
+  .blocked-brand{font-size:17px}
+  .blocked-content{padding:34px 0}
+  .blocked-symbol{
+    width:54px;height:54px;
+    margin-bottom:16px;
+    font-size:23px;
+  }
+  .blocked-content h1{font-size:25px}
+  .blocked-message{font-size:14px;line-height:1.9}
+  .blocked-note{font-size:11.5px}
+  .blocked-footer{
+    min-height:54px;
+    flex-wrap:wrap;
+    font-size:9.5px;
+  }
+}
+
+/* خيارات الإشعار */
+.site-notice.no-icon > i{display:none !important}
+.site-notice.no-icon{padding-right:16px}
+.site-notice.no-title .site-notice-title{display:none !important}
+.site-notice.no-title .site-notice-text{margin-top:0}
+
+
+/* ===== تثبيت عرض الموقع عند التركيز على البحث ===== */
+#searchInput,
+.input-container input[type="text"]{
+  font-size:16px !important;
+  -webkit-text-size-adjust:100%;
+}
+@media(max-width:600px){
+  #searchInput,
+  .input-container input[type="text"]{
+    font-size:16px !important;
+  }
+}
+
 </style>
 
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -2898,7 +3055,6 @@ footer.ramz-footer{
       for(const id of ids){
         const d=await db.collection('blocks').doc(id).get();
         if(!d.exists)continue;
-
         const b=d.data();
         const active=b.active!==false&&(
           b.permanent||
@@ -2908,37 +3064,29 @@ footer.ramz-footer{
 
         if(active){
           const reason=b.show_reason&&b.reason?String(b.reason):settings.blockMessage;
-          const ends=b.permanent||!b.ends_at?'حظر دائم':(()=>{
+          let duration='';
+          if(b.permanent||!b.ends_at){
+            duration='الحظر دائم';
+          }else{
             try{
               const dt=b.ends_at.toDate?b.ends_at.toDate():new Date(b.ends_at);
-              return 'حتى '+dt.toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'});
-            }catch{return ''}
-          })();
+              duration='ينتهي الحظر في '+dt.toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'});
+            }catch{}
+          }
 
           document.body.innerHTML=`
             <main class="blocked-page" role="main">
-              <div class="blocked-brand">رمز <span>| Ramz</span></div>
+              <header class="blocked-top">
+                <div class="blocked-brand">رمز <span>| Ramz</span></div>
+              </header>
 
               <section class="blocked-content" aria-labelledby="blockedTitle">
-                <div class="blocked-icon" aria-hidden="true">
-                  <i class="bx bx-lock-alt"></i>
-                </div>
-
+                <div class="blocked-symbol" aria-hidden="true"><i class="bx bx-lock-alt"></i></div>
                 <h1 id="blockedTitle">تم تقييد الوصول</h1>
                 <p class="blocked-message">${escHtml(reason)}</p>
-
-                ${ends?`<div class="blocked-duration"><i class="bx bx-time-five"></i><span>${escHtml(ends)}</span></div>`:''}
-
-                <div class="blocked-divider"></div>
-
-                <p class="blocked-note">
-                  لا يمكنك استخدام الموقع في الوقت الحالي. إذا كنت ترى أن هذا التقييد تم بالخطأ، يمكنك التواصل معنا.
-                </p>
-
-                <button class="blocked-contact" id="blockedContactBtn" type="button">
-                  <i class="bx bx-support"></i>
-                  <span>تواصل معنا</span>
-                </button>
+                ${duration?`<div class="blocked-duration"><i class="bx bx-time-five"></i><span>${escHtml(duration)}</span></div>`:''}
+                <div class="blocked-rule"></div>
+                <p class="blocked-note">لا يمكن استخدام خدمات الموقع من هذا الجهاز في الوقت الحالي.</p>
               </section>
 
               <footer class="blocked-footer">
@@ -2947,17 +3095,6 @@ footer.ramz-footer{
               </footer>
             </main>
           `;
-
-          const btn=document.getElementById('blockedContactBtn');
-          if(btn){
-            btn.addEventListener('click',()=>{
-              const c=publicContacts
-                .filter(x=>x.active!==false)
-                .sort((a,b)=>(Number(a.order||0)-Number(b.order||0)))[0];
-              if(c)location.href=safeUrl(c.url);
-              else location.reload();
-            });
-          }
           return true;
         }
       }
@@ -2970,7 +3107,44 @@ footer.ramz-footer{
 
   function safeUrl(v=''){try{const u=new URL(String(v),location.href);return ['http:','https:','mailto:','tel:'].includes(u.protocol)?u.href:'#'}catch{return '#'}}
   function contactIcon(type='link'){return ({tiktok:'bxl-tiktok',telegram:'bxl-telegram',whatsapp:'bxl-whatsapp',instagram:'bxl-instagram',x:'bxl-twitter',twitter:'bxl-twitter',facebook:'bxl-facebook',youtube:'bxl-youtube',email:'bx-envelope',phone:'bx-phone',website:'bx-link-external'}[type]||'bx-link-external')}
-  function renderSiteNotice(){const active=publicNotifications.filter(x=>x.active!==false).sort((a,b)=>((b.created_at?.seconds||0)-(a.created_at?.seconds||0)))[0];const box=$('#siteNotice');if(!box)return;if(!active){box.classList.remove('show');return}const dismissed=sessionStorage.getItem('ramz_notice_'+active.id)==='1';if(dismissed){box.classList.remove('show');return}$('#siteNoticeTitle').textContent=active.title||'تنبيه';$('#siteNoticeText').textContent=active.text||'';const a=$('#siteNoticeAction');if(active.link_url&&active.link_label){a.href=safeUrl(active.link_url);a.textContent=active.link_label;a.style.display='inline-flex'}else a.style.display='none';box.dataset.id=active.id;box.classList.add('show')}
+  function renderSiteNotice(){
+    const active=publicNotifications
+      .filter(x=>x.active!==false)
+      .sort((a,b)=>((b.created_at?.seconds||0)-(a.created_at?.seconds||0)))[0];
+
+    const box=$('#siteNotice');
+    if(!box)return;
+    if(!active){box.classList.remove('show');return}
+
+    const dismissed=sessionStorage.getItem('ramz_notice_'+active.id)==='1';
+    if(dismissed){box.classList.remove('show');return}
+
+    const showIcon=active.show_icon!==false;
+    const showTitle=active.show_title!==false && !!String(active.title||'').trim();
+
+    box.classList.toggle('no-icon',!showIcon);
+    box.classList.toggle('no-title',!showTitle);
+
+    const title=$('#siteNoticeTitle');
+    const text=$('#siteNoticeText');
+    if(title){
+      title.textContent=active.title||'';
+      title.style.display=showTitle?'':'none';
+    }
+    if(text)text.textContent=active.text||'';
+
+    const a=$('#siteNoticeAction');
+    if(active.link_url&&active.link_label){
+      a.href=safeUrl(active.link_url);
+      a.textContent=active.link_label;
+      a.style.display='inline-flex';
+    }else{
+      a.style.display='none';
+    }
+
+    box.dataset.id=active.id;
+    box.classList.add('show');
+  }
   $('#siteNoticeClose')?.addEventListener('click',()=>{const box=$('#siteNotice');if(box?.dataset.id)sessionStorage.setItem('ramz_notice_'+box.dataset.id,'1');box?.classList.remove('show')});
 
   function syncAdsDotsPosition(){

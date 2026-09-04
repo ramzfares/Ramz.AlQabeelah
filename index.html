@@ -2805,6 +2805,200 @@ footer.ramz-footer{
   }
 }
 
+
+/* ===== صفحة الحظر: ملء الشاشة بالكامل ===== */
+html.blocked-mode,
+body.blocked-mode{
+  width:100% !important;
+  height:100% !important;
+  min-height:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  background:var(--bg) !important;
+}
+
+body.blocked-mode{
+  position:fixed !important;
+  inset:0 !important;
+}
+
+.blocked-page{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:999999 !important;
+  width:100vw !important;
+  height:100dvh !important;
+  min-height:100vh !important;
+  margin:0 !important;
+  padding:0 20px !important;
+  display:grid !important;
+  grid-template-rows:72px 1fr 58px !important;
+  align-items:stretch !important;
+  justify-items:stretch !important;
+  overflow:hidden !important;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(107,66,43,.055),transparent 34%),
+    var(--bg) !important;
+  color:var(--text) !important;
+  direction:rtl !important;
+  text-align:center !important;
+  box-sizing:border-box !important;
+}
+
+.blocked-top{
+  width:min(980px,100%) !important;
+  height:72px !important;
+  min-height:72px !important;
+  margin:0 auto !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-bottom:1px solid rgba(107,66,43,.10) !important;
+}
+
+.blocked-brand{
+  position:static !important;
+  inset:auto !important;
+  margin:0 !important;
+  color:var(--brand) !important;
+  font-size:18px !important;
+  font-weight:800 !important;
+}
+.blocked-brand span{
+  color:var(--muted) !important;
+  font-size:12px !important;
+  font-weight:500 !important;
+}
+
+.blocked-content{
+  width:min(560px,100%) !important;
+  height:100% !important;
+  margin:0 auto !important;
+  padding:24px 0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  box-sizing:border-box !important;
+}
+
+.blocked-symbol{
+  width:60px !important;
+  height:60px !important;
+  display:grid !important;
+  place-items:center !important;
+  margin:0 0 18px !important;
+  border:1px solid var(--border-strong) !important;
+  border-radius:50% !important;
+  background:var(--surface-soft) !important;
+  color:var(--brand) !important;
+  font-size:26px !important;
+  flex:0 0 auto !important;
+}
+
+.blocked-content h1{
+  margin:0 !important;
+  color:var(--text) !important;
+  font-size:29px !important;
+  line-height:1.4 !important;
+  font-weight:800 !important;
+}
+
+.blocked-message{
+  max-width:500px !important;
+  margin:11px auto 0 !important;
+  color:var(--muted) !important;
+  font-size:15px !important;
+  line-height:2 !important;
+}
+
+.blocked-duration{
+  margin-top:16px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:7px !important;
+  color:var(--brand) !important;
+  font-size:12px !important;
+  font-weight:700 !important;
+}
+
+.blocked-rule{
+  width:38px !important;
+  height:1px !important;
+  margin:20px auto 17px !important;
+  background:var(--border-strong) !important;
+}
+
+.blocked-note{
+  max-width:450px !important;
+  margin:0 auto !important;
+  color:#8f8178 !important;
+  font-size:12px !important;
+  line-height:1.9 !important;
+}
+
+.blocked-footer{
+  position:static !important;
+  inset:auto !important;
+  width:min(980px,100%) !important;
+  height:58px !important;
+  min-height:58px !important;
+  margin:0 auto !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+  border-top:1px solid rgba(107,66,43,.10) !important;
+  color:#9a8d84 !important;
+  font-size:10px !important;
+}
+
+@media(max-width:600px){
+  .blocked-page{
+    padding:0 16px !important;
+    grid-template-rows:64px 1fr 52px !important;
+  }
+  .blocked-top{
+    height:64px !important;
+    min-height:64px !important;
+  }
+  .blocked-content{
+    padding:18px 0 !important;
+  }
+  .blocked-symbol{
+    width:54px !important;
+    height:54px !important;
+    margin-bottom:15px !important;
+    font-size:23px !important;
+  }
+  .blocked-content h1{
+    font-size:24px !important;
+  }
+  .blocked-message{
+    font-size:14px !important;
+    line-height:1.9 !important;
+  }
+  .blocked-duration{
+    margin-top:14px !important;
+    font-size:11.5px !important;
+  }
+  .blocked-rule{
+    margin:18px auto 15px !important;
+  }
+  .blocked-note{
+    font-size:11.5px !important;
+  }
+  .blocked-footer{
+    height:52px !important;
+    min-height:52px !important;
+    font-size:9.5px !important;
+    flex-wrap:wrap !important;
+  }
+}
+
 </style>
 
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -3047,6 +3241,169 @@ footer.ramz-footer{
   async function resolveGeo(){try{const r=await fetch('https://ipwho.is/',{cache:'no-store'});const j=await r.json();if(j.success!==false){publicIp=j.ip||publicIp;countryName=j.country||countryName;countryCode=(j.country_code||countryCode).toUpperCase();return}}catch{}try{const r=await fetch('https://api.ipify.org?format=json',{cache:'no-store'});const j=await r.json();publicIp=j.ip||publicIp}catch{}}
   async function recordVisit(){if(sessionStorage.getItem('ramz_visit_written')==='1')return;const d=deviceInfo();try{await db.collection('analytics_visits').add({visitor_id:visitorId,session_id:sessionId,ip:publicIp,country_name:countryName,country_code:countryCode,device_type:d.device,os:d.os,created_at:FV.serverTimestamp()});sessionStorage.setItem('ramz_visit_written','1')}catch(e){console.warn('visit',e)}}
   function blockKey(s,prefix='v_'){let h=2166136261;for(const c of String(s)){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return prefix+(h>>>0).toString(16)}
+  function isBlockActive(b){
+    if(!b||b.active===false)return false;
+    if(b.permanent||!b.ends_at)return true;
+    try{
+      const dt=b.ends_at.toDate?b.ends_at.toDate():new Date(b.ends_at);
+      return dt.getTime()>Date.now();
+    }catch{return false}
+  }
+
+  function renderBlockedPage(b){
+    if(document.body.classList.contains('blocked-mode'))return;
+
+    const reason=b?.show_reason&&b?.reason?String(b.reason):settings.blockMessage;
+    let duration='';
+
+    if(b?.permanent||!b?.ends_at){
+      duration='الحظر دائم';
+    }else{
+      try{
+        const dt=b.ends_at.toDate?b.ends_at.toDate():new Date(b.ends_at);
+        duration='ينتهي الحظر في '+dt.toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'});
+      }catch{}
+    }
+
+    document.documentElement.classList.add('blocked-mode');
+    document.body.classList.add('blocked-mode');
+
+    // تثبيت الصفحة بالكامل ومنع أي تنسيقات قديمة من التأثير عليها
+    document.documentElement.style.cssText='margin:0!important;padding:0!important;width:100%!important;height:100%!important;overflow:hidden!important;background:#f7f4f1!important;';
+    document.body.style.cssText='margin:0!important;padding:0!important;width:100%!important;height:100%!important;min-height:100vh!important;overflow:hidden!important;background:#f7f4f1!important;font-family:"IBM Plex Sans Arabic",Arial,sans-serif!important;';
+
+    document.body.innerHTML=`
+      <div style="
+        position:fixed;
+        inset:0;
+        z-index:2147483647;
+        width:100vw;
+        height:100dvh;
+        min-height:100vh;
+        display:flex;
+        flex-direction:column;
+        background:
+          radial-gradient(circle at 50% 42%,rgba(107,66,43,.06),transparent 34%),
+          #f7f4f1;
+        color:#352b25;
+        direction:rtl;
+        text-align:center;
+        overflow:hidden;
+      ">
+        <header style="
+          height:68px;
+          min-height:68px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          padding:0 20px;
+          border-bottom:1px solid rgba(107,66,43,.10);
+        ">
+          <div style="font-size:18px;font-weight:800;color:#6b422b;">
+            رمز <span style="font-size:12px;font-weight:500;color:#8b7c72;">| Ramz</span>
+          </div>
+        </header>
+
+        <main style="
+          flex:1;
+          min-height:0;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          padding:28px 22px;
+          overflow:auto;
+          -webkit-overflow-scrolling:touch;
+        ">
+          <div style="
+            width:min(520px,100%);
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            margin:auto;
+          ">
+            <div style="
+              width:58px;
+              height:58px;
+              display:grid;
+              place-items:center;
+              border-radius:50%;
+              background:#efe7e1;
+              color:#6b422b;
+              font-size:25px;
+              margin-bottom:18px;
+            ">
+              <i class="bx bx-lock-alt"></i>
+            </div>
+
+            <h1 style="
+              margin:0;
+              font-size:28px;
+              line-height:1.4;
+              font-weight:800;
+              color:#352b25;
+            ">تم تقييد الوصول</h1>
+
+            <p style="
+              max-width:470px;
+              margin:12px auto 0;
+              font-size:14px;
+              line-height:2;
+              color:#786a61;
+            ">${escHtml(reason)}</p>
+
+            ${duration?`
+            <div style="
+              margin-top:15px;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              gap:6px;
+              color:#6b422b;
+              font-size:12px;
+              font-weight:700;
+            ">
+              <i class="bx bx-time-five" style="font-size:16px;"></i>
+              <span>${escHtml(duration)}</span>
+            </div>`:''}
+
+            <div style="
+              width:38px;
+              height:1px;
+              margin:20px auto 17px;
+              background:#d9cec6;
+            "></div>
+
+            <p style="
+              max-width:430px;
+              margin:0;
+              font-size:11.5px;
+              line-height:1.9;
+              color:#91847b;
+            ">لا يمكن استخدام خدمات الموقع من هذا الجهاز في الوقت الحالي.</p>
+          </div>
+        </main>
+
+        <footer style="
+          min-height:52px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          gap:8px;
+          padding:10px 16px;
+          border-top:1px solid rgba(107,66,43,.10);
+          color:#9a8d84;
+          font-size:10px;
+          flex-wrap:wrap;
+        ">
+          <span>© ${new Date().getFullYear()} حقوق النشر محفوظة</span>
+          <span style="opacity:.55;">•</span>
+          <span>رمز | Ramz</span>
+        </footer>
+      </div>
+    `;
+  }
+
   async function checkBlock(){
     try{
       const ids=[blockKey(visitorId,'v_')];
@@ -3056,45 +3413,8 @@ footer.ramz-footer{
         const d=await db.collection('blocks').doc(id).get();
         if(!d.exists)continue;
         const b=d.data();
-        const active=b.active!==false&&(
-          b.permanent||
-          !b.ends_at||
-          ((b.ends_at.toDate?b.ends_at.toDate():new Date(b.ends_at)).getTime()>Date.now())
-        );
-
-        if(active){
-          const reason=b.show_reason&&b.reason?String(b.reason):settings.blockMessage;
-          let duration='';
-          if(b.permanent||!b.ends_at){
-            duration='الحظر دائم';
-          }else{
-            try{
-              const dt=b.ends_at.toDate?b.ends_at.toDate():new Date(b.ends_at);
-              duration='ينتهي الحظر في '+dt.toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'});
-            }catch{}
-          }
-
-          document.body.innerHTML=`
-            <main class="blocked-page" role="main">
-              <header class="blocked-top">
-                <div class="blocked-brand">رمز <span>| Ramz</span></div>
-              </header>
-
-              <section class="blocked-content" aria-labelledby="blockedTitle">
-                <div class="blocked-symbol" aria-hidden="true"><i class="bx bx-lock-alt"></i></div>
-                <h1 id="blockedTitle">تم تقييد الوصول</h1>
-                <p class="blocked-message">${escHtml(reason)}</p>
-                ${duration?`<div class="blocked-duration"><i class="bx bx-time-five"></i><span>${escHtml(duration)}</span></div>`:''}
-                <div class="blocked-rule"></div>
-                <p class="blocked-note">لا يمكن استخدام خدمات الموقع من هذا الجهاز في الوقت الحالي.</p>
-              </section>
-
-              <footer class="blocked-footer">
-                <span>© ${new Date().getFullYear()} حقوق النشر محفوظة</span>
-                <span>رمز | Ramz</span>
-              </footer>
-            </main>
-          `;
+        if(isBlockActive(b)){
+          renderBlockedPage(b);
           return true;
         }
       }
@@ -3102,6 +3422,36 @@ footer.ramz-footer{
       console.warn('block check',e);
     }
     return false
+  }
+
+  let blockWatchUnsubs=[];
+  function startRealtimeBlockWatch(){
+    blockWatchUnsubs.forEach(fn=>{try{fn()}catch{}});
+    blockWatchUnsubs=[];
+
+    const ids=[blockKey(visitorId,'v_')];
+    if(publicIp&&publicIp!=='غير متاح')ids.push(blockKey(publicIp,'ip_'));
+
+    [...new Set(ids)].forEach(id=>{
+      const unsub=db.collection('blocks').doc(id).onSnapshot(doc=>{
+        if(doc.exists&&isBlockActive(doc.data())){
+          renderBlockedPage(doc.data());
+          return;
+        }
+
+        // إذا تم فك الحظر أثناء ظهور صفحة الحظر، أعد تحميل الموقع تلقائيًا.
+        if(document.body.classList.contains('blocked-mode')){
+          Promise.all([...new Set(ids)].map(x=>db.collection('blocks').doc(x).get()))
+            .then(snaps=>{
+              const stillBlocked=snaps.some(s=>s.exists&&isBlockActive(s.data()));
+              if(!stillBlocked)location.reload();
+            })
+            .catch(()=>{});
+        }
+      },e=>console.warn('block realtime',e));
+
+      blockWatchUnsubs.push(unsub);
+    });
   }
   function activeTribes(){return tribes.filter(t=>(!t.recordType||t.recordType==='tribe')&&(t.status||'active')==='active')}
 
@@ -3380,7 +3730,7 @@ footer.ramz-footer{
   }
   setTimeout(hideSiteBootLoader,9000);
 
-  async function boot(){try{await resolveGeo();const s=await db.collection('settings').doc('site').get();if(s.exists)settings={...settings,...s.data()};if(settings.siteStatus==='maintenance'){showNo('الموقع تحت الصيانة حالياً. يرجى المحاولة لاحقاً.','الصيانة');searchBtn.disabled=true}if(await checkBlock())return;await recordVisit();
+  async function boot(){try{await resolveGeo();const s=await db.collection('settings').doc('site').get();if(s.exists)settings={...settings,...s.data()};if(settings.siteStatus==='maintenance'){showNo('الموقع تحت الصيانة حالياً. يرجى المحاولة لاحقاً.','الصيانة');searchBtn.disabled=true}if(await checkBlock())return;startRealtimeBlockWatch();await recordVisit();
       db.collection('site_notifications').onSnapshot(s=>{publicNotifications=s.docs.map(d=>({id:d.id,...d.data()}));renderSiteNotice();finishBootPart('notifications')},e=>{console.warn('notifications',e);finishBootPart('notifications')});
       db.collection('site_ads').onSnapshot(s=>{publicAds=s.docs.map(d=>({id:d.id,...d.data()}));renderAds();finishBootPart('ads')},e=>{console.warn('ads',e);finishBootPart('ads')});
       db.collection('site_contacts').onSnapshot(s=>{publicContacts=s.docs.map(d=>({id:d.id,...d.data()}));renderContacts();finishBootPart('contacts')},e=>{console.warn('contacts',e);finishBootPart('contacts')});
